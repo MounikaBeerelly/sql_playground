@@ -1,6 +1,5 @@
-## SQL Statements
-
-1. DDL 
+### SQL Statements
+1. DDL
 2. DML
 3. TCL
 4. DCL
@@ -32,7 +31,7 @@
                 - `alter table <table-name> rename column <column-name> to <new column-name>`
             - **Example**
                 - `alter table emp-test rename column hire-date to hiredate`
-        4. drop -  drop the exisiting column 
+        4. drop -  drop the exisiting column
             - **Syntax**
                 - `alter table <table-name> drop column <column-name>`
             - **Example**
@@ -47,7 +46,7 @@
             - `rename <old table-name> to <new table-name>`
         - **Example**
             - `rename emp-test to emo-demo`
-    5. TRUNCATE - Delete entire table data. 
+    5. TRUNCATE - Delete entire table data.
         - It will not allow to use where clause.
         - We cannot rollback the back after truncate.
         - It is auto committed command. It will commit and delete at a time.
