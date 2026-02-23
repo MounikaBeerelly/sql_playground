@@ -1,4 +1,4 @@
-## Notes:
+# SQL Playground
 
 - Check all the tables : `select * from tab;`
 - dummy table to perform operations: `select 5+6 from dummy;`
