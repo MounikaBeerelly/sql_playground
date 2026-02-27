@@ -18,8 +18,8 @@
     - These joins are used when tables are related by ranges rather than exact matches.
     - ` select empno,ename,sal,grade from emp, salgrade where sal>=losal and sal<=hisal;`
     ```
-     select empno,ename,sal,grade 
-     from emp, salgrade 
+     select empno,ename,sal,grade
+     from emp, salgrade
      where sal between losal and hisal;
      ```
 3. **Outer joins**
@@ -27,7 +27,7 @@
     1. Left outer join
         - + operator right side
     2. Right outer join
-        - + operator left side 
+        - + operator left side
     ```
      select empno,ename,emp.deptno,dname,loc
      from emp,dept
@@ -40,25 +40,26 @@
     ```
 4. **Self joins**
 - A Self Join is a join where a table is joined with itself.
-- ```
-select e.empno,e.ename,m.ename manager 
-from emp e, emp m 
-where e.mgr=m.empno;
-```
+-   ```
+    select e.empno,e.ename,m.ename manager
+    from emp e, emp m
+    where e.mgr=m.empno;
+    ```
+
 ### ANSI Joins
 
-1. **Cross Join** 
+1. **Cross Join**
     - cartesian product
     - `select ename,dept.deptno,dname,loc from emp cross join dept;`
-2. **Natural Join** 
-    - search for the common columns between the two tables and join the data. 
+2. **Natural Join**
+    - search for the common columns between the two tables and join the data.
     - `select ename,deptno,dname,loc from emp natural join dept;`
     - **Using Clause** - same as NAtural join. But when we have two same columns in two tables, go for Using clause
         - `select ename,deptno,dname,loc from emp join dept using(deptno);`
 3. **Equi Joins**
 4. **Non Equi joins**
     ```
-    select ename, sal,grade, dept.deptno,dname, 
+    select ename, sal,grade, dept.deptno,dname,
     from emp join dept
             on emp.deptno=dept.deptno
     join salgrade
@@ -85,12 +86,12 @@ where e.mgr=m.empno;
         ```
 6. **Self join**
     ```
-    select e.ename employee, 
+    select e.ename employee,
            m.ename manager
     from emp E INNER JOIN emp M
             on(e.mgr=m.empno);
     ```
-7. **Inner Join** 
+7. **Inner Join**
     ```
     select ename,dept.deptno,dname,loc
     from emp inner join dept
