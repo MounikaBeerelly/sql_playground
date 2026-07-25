@@ -146,6 +146,19 @@ select substr('oracle', 3, 2) as extracted_string from dual;
 SELECT INSTR('COMPUTER MAINTENANCE CORPORATION', 'A') AS FIRST_OCCURRENCE FROM DUAL;
 
 35. Display the information from the employee table . where ever job Manager is found it should be displayed as Boss?
+SELECT EMPNO, ENAME, JOB,
+       DECODE (JOB,
+        'MANAGER', 'BOSS',
+        JOB
+       ) AS NEW_JOB
+FROM emp;
+
+SELECT EMPNO, ENAME, JOB,
+         CASE
+            WHEN JOB = 'MANAGER' THEN 'BOSS'
+            ELSE JOB
+            END AS NEW_JOB
+FROM emp;
 
 36. Display employ records in the format of "Scott has joined the company on 13th August ninteen ninety"
 SELECT ENAME || ' has joined the company on ' || TO_CHAR(HIREDATE, 'DDTH MONTH YYYY') AS EMPLOYEE_INFO FROM EMP;
