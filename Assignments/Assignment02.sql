@@ -335,7 +335,7 @@ ALTER TABLE flights ADD CONSTRAINT PK_FLIGHTS PRIMARY KEY (FNO, DEPARTS);
 
 25.	add a not null column sex to the employee table with default value as ‘m’.
 
- ALTER TABLE employees ADD (SEX VARCHAR2(6) DEFAULT 'm' NOT NULL);
+ALTER TABLE employees ADD (SEX VARCHAR2(6) DEFAULT 'm' NOT NULL);
 
 Note:use emp  , dept , salgrade  tables for following questions.
 
