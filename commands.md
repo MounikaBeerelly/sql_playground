@@ -17,3 +17,13 @@
 15. `delete from <table-name>;` : delete all the data from the table
 16. `delete from <table-name> where <col-name>=<value>;` : Delete particular data from the table
 17. `truncate table <table-name>;` : delete complete table data and commit
+
+```
+**How to give DBA permissions to the user
+**
+    C:\Users\upend>sqlplus scott/tiger
+    SQL> conn / as sysdba
+    Connected.
+    SQL> grant dba to scott;
+    Grant succeeded.
+```
