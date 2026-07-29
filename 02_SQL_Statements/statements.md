@@ -48,7 +48,7 @@
             - `rename emp-test to emo-demo`
     5. TRUNCATE - Delete entire table data.
         - It will not allow to use where clause.
-        - We cannot rollback the back after truncate.
+        - We cannot rollback the data after truncate.
         - It is auto committed command. It will commit and delete at a time.
         - All the DDL commands are auto-committed commands.
         - **Syntax** :

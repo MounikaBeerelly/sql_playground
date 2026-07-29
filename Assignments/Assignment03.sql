@@ -216,6 +216,11 @@ SELECT LAST_DAY(SYSDATE) AS LAST_DAY_OF_MONTH FROM DUAL;
 20.	Print the current date as 15th  march nineteen eighty seven.
 SELECT TO_CHAR(SYSDATE, 'DDth month YYYY') AS CURRENT_DATE FROM DUAL;
 
+21.	Display all the Driver names with prefixing 'HANDLER'
+SELECT Name,
+       CONCAT('HANDLER ', Name) AS DRIVER_NAME
+FROM driver;
+
 22.	Display the last three characters of Address of all drivers.
 SELECT SUBSTR(Address, -3) AS Last_Three_Characters FROM driver;
 
@@ -276,23 +281,32 @@ SELECT LOWER(Name) AS Driver_Name FROM driver;
 34.	Display all the car models as First letter of the word should be capital.
 SELECT INITCAP(Car_Model) AS Car_Model FROM car;
 
-37.	Add a column to driver table , and rename a column of driver table.
+36.	Show the difference  between truncate and drop.
+// Truncate: Delete the records, cannot rollback
+TRUNCATE TABLE emp_test;
+// Drop : Delete entire table
+DROP TABLE emp_test;
 
+37.	Add a column to driver table , and rename a column of driver table.
 ALTER TABLE driver add Phone_Number NUMBER(10);
 ALTER TABLE driver RENAME COLUMN Phone_Number TO GENDER;
 
 38.	Find the position of Second 'a' in "Las vegas".
 SELECT INSTR('Las vegas', 'a', 1, 2) FROM DUAL;
 
-40.	Update driver name steve to stephen.
+39.	Add a check constraing to the damage amount column( damage amount should not be more than 50000 and should not be less than 1000)
+ALTER TABLE claim_insurance
+ADD CONSTRAINT chk_amount
+CHECK (Damage_amount >= 1000 AND Damage_amount <= 50000);
 
+40.	Update driver name steve to stephen.
 UPDATE driver
 SET Name = 'Stephen'
 WHERE Name = 'Steve';
 
 
 Note: Use EMP , DEPT , SALGRADE tables for 41 to 45
-
+----------------------------------------------------
 
 41.	 Display the Manager Names.
 SELECT DISTINCT E.ENAME AS MANAGER_NAME
@@ -302,7 +316,6 @@ ON E.EMPNO = M.MGR;
 
 
 42.	 Display the names of employees who earn  Highest salaries respective departments.
-
 SELECT E.EMPNO, E.ENAME, E.DEPTNO, E.SAL
 FROM EMP E
 WHERE SAL = (
@@ -318,9 +331,7 @@ JOIN emp M
 on E.EMPNO = M.MGR
 WHERE M.ENAME = 'JONES';
 
-
 44.	 Display the all employees information(name, job , his manager) , if employee dont have a manager then display his manager information as NO MANAGER.
-
 SELECT E.ENAME AS EMPLOYEE_NAME,
 	   E.JOB,
     CASE
@@ -332,7 +343,6 @@ LEFT JOIN EMP M
 ON E.MGR = M.EMPNO;
 
 45.	  Display employee name,dept name,salary,and commission for those sal in between 2000 to 5000 while location is Chicago.
-
 SELECT E.ENAME, D.DNAME, E.SAL, E.COMM
 FROM EMP E
 JOIN DEPT D
