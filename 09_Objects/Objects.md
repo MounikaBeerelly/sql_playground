@@ -61,7 +61,7 @@
     ```
 
 3. **Indexes**
-    - Index table will contain addresses of each and every column.
+    - An index is a database object that stores the indexed column values and their corresponding ROWIDs to speed up data retrieval.
     - Types of Indexes :
         1. Simple/Normal Index
         2. Unique Index
@@ -118,6 +118,7 @@
     - Table updated frequently
 
 4. **Sequence**
+    - A sequence is a database object that automatically generates unique numeric values, most commonly used to assign primary key values. Use NEXTVAL to generate the next number and CURRVAL to retrieve the current number generated in your session.
     - help us to generate the values automatically
     - `CURRVAL & NEXTVAL` can be applied on only on sequences.
     - An object from which multiple users may generate unique integers
@@ -150,7 +151,7 @@
         NOCYCLE
         ;
 
-        --first time without definit=ng the NEXTVAL we cannot get CURRVAL
+        -- first time without definit=ng the NEXTVAL we cannot get CURRVAL
         SELECT SampleSeq01.CURRVAL FROM DUAL;
         SELECT SampleSeq01.NEXTVAL FROM DUAL;
 
