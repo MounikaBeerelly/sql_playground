@@ -161,7 +161,7 @@
     ```
 
 ### LEVEL
-- Show the level of hierarchy
+- to show the hierarchy level
 
     ```
     SELECT Ename, Empno, MGR, Job, level
