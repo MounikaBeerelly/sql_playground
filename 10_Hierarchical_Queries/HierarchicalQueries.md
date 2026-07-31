@@ -117,6 +117,7 @@
         CONNECT BY PRIOR Empno = MGR
     ;
     ```
+    ```
     SELECT Ename,
            Sal,
            Job,
