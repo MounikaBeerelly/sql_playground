@@ -170,4 +170,11 @@
         CONNECT BY PRIOR Empno = MGR
     ;
     ```
+    ```
+    SELECT Empno, LPAD(ename, LEVEL*5, ' ') name
+        FROM Emp
+        START WITH Job = 'PRESIDENT'
+        CONNECT BY PRIOR Empno = MGR
+    ;
+    ```
 
