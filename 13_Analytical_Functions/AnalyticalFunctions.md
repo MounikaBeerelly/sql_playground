@@ -92,7 +92,7 @@ FROM emp
 ;
 ```
 6. **RANK** :
-- We use RANK we want to assign a sequential order, or rank, to people within a department based on salary, we might use the RANK function like.
+- RANK() is an analytical function that assigns a rank to rows based on the ORDER BY clause. Rows with equal values receive the same rank, and the next rank is skipped. It is commonly used to find the highest, second-highest, or nth-highest values in a dataset.
 - Example :
 ```
 SELECT empno,
@@ -145,6 +145,7 @@ WHERE rnk = 1
 ```
 7. **DENSE_RANK** :
 - The DENSE_RANK function acts like the RANK function except that it assigns consecutive ranks.
+- Same values get the same rank, but no ranks are skipped.
 - Example :
 ```
 SELECT empno,
@@ -180,6 +181,8 @@ WHERE sal_rnk = 1
 ```
 8. **LISTAGG** :
 - The `LISTAGG` analytic function was introduced in Oracle 11g Release, making it very easy to aggregate strings.
+- LISTAGG() is an aggregate function that combines multiple row values into a single string, separated by a delimiter (such as a comma).
+- It is commonly used to display multiple values in one row.
 - This function is it also allows us to order the elements in the concatenated list.
 - Example :
 ```
@@ -330,7 +333,7 @@ FROM emp
 ```
 14. **CASE** :
 - The CASE expression was first added to SQL on Oracle8i. Oracle9i extends its support to Pl/SQL.
-- There are two types of casr expressions are there
+- There are two types of case expressions are there
     1. Value Match Case
     2. Searched Case
 
