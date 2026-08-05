@@ -115,7 +115,6 @@ SELECT * FROM driver WHERE Address = 'Newyork';
 
 SELECT * FROM car WHERE Car_Model LIKE '_a%';
 
-
 4.	Display the details of report number , location and the damage amount of car
 
 SELECT A.Report_Num,
@@ -207,8 +206,28 @@ DROP CONSTRAINT DRIVERID_PK;
 ALTER TABLE claim_insurance
 MODIFY Driver_Id CONSTRAINT DRIVERID_NN NOT NULL;
 
+15.	Create a view as car_v1 on Cars table that containg reg_num , car model columns.
+
+CREATE VIEW car_v1
+AS
+	SELECT Reg_Num "reg_num",
+		Car_Model car_model
+FROM car;
+
 16.	Add a dob column to dirver table.
 ALTER TABLE driver add DOB DATE;
+
+17.	Add year column to car_v1
+
+CREATE or REPLACE VIEW car_v1
+AS
+	SELECT Reg_Num "reg_num",
+		   Car_Model car_model,
+           year "Car_year"
+FROM car;
+
+18.	Create a sequence as Driver_seq.
+CREATE sequence Driver_seq;
 
 19.	Find the last day of the month.
 SELECT LAST_DAY(SYSDATE) AS LAST_DAY_OF_MONTH FROM DUAL;
@@ -265,6 +284,14 @@ JOIN claim_insurance CI
 ON C.Reg_Num = CI.Reg_Num
 GROUP BY C.Reg_Num, C.Car_Model;
 
+27.	Find the next value of Driver_seq sequence .
+SELECT Driver_seq.NEXTVAL
+FROM DUAL;
+
+28.	Find the current value of Driver_seq.
+SELECT Driver_seq.CURRVAL
+FROM DUAL;
+
 29.	Display the next day of today.
 SELECT SYSDATE + 1 FROM DUAL;
 
@@ -275,11 +302,18 @@ SELECT TO_CHAR(SYSDATE, 'DAY') AS TODAY FROM DUAL;
 CREATE TABLE driver_dup AS
 SELECT * FROM driver;
 
+32.	Create a table Acc_tab with the same structure of accident table.
+CREATE PUBLIC SYNONYM Acc_tab FOR accident;
+
 33.	Display all  the names of drivers in lower case.
 SELECT LOWER(Name) AS Driver_Name FROM driver;
 
 34.	Display all the car models as First letter of the word should be capital.
 SELECT INITCAP(Car_Model) AS Car_Model FROM car;
+
+35.	Insert a record into car_v1.
+INSERT INTO car_v1(reg_num, car_model, year)
+VALUES(11234, 'SUZUKI', 2020);
 
 36.	Show the difference  between truncate and drop.
 // Truncate: Delete the records, cannot rollback
@@ -303,7 +337,6 @@ CHECK (Damage_amount >= 1000 AND Damage_amount <= 50000);
 UPDATE driver
 SET Name = 'Stephen'
 WHERE Name = 'Steve';
-
 
 Note: Use EMP , DEPT , SALGRADE tables for 41 to 45
 ----------------------------------------------------
