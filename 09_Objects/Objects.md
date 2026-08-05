@@ -110,7 +110,7 @@
     - The column is frequently used in the where clause or in a join condition.
     - The column contains large number of NULL values
     - Two or more columns are frequently used together in the where clause and join condition
-    - the table is large and most queries are expected ti retrieve less than 3 to 4% of the rows
+    - the table is large and most queries are expected to retrieve less than 3 to 4% of the rows
 - **when not to create Index** :
     - The table is too small
     - The column are not often used as condition in the query
