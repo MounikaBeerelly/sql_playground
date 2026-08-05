@@ -62,7 +62,6 @@
     WHERE ROWNUM < 6
     ```
 
-
 - **ROWID**
     - Represents the physical address of the row in the database
     - Oracle can directly locate and update the row using its physical address, making it very efficient.
