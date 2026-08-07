@@ -2,9 +2,471 @@
 - `CHAR` is a fixed-length datatype. It always stores the full defined length by padding extra spaces if needed.
 - `VARCHAR2` is a variable-length datatype. It stores only the actual data without padding, making it more storage efficient for values of varying lengths.
 
+## JOINS :
+### 1. What is a JOIN?
+- A JOIN is used to combine rows from two or more tables based on a related column.
+- Example :
+    ```
+    SELECT e.ename, d.dname
+    FROM emp e
+    JOIN dept d
+    ON e.deptno = d.deptno
+    ;
+
+    Output:
+    =======
+    ENAME      DNAME
+    --------   ----------
+    SMITH      RESEARCH
+    ALLEN      SALES
+    WARD       SALES
+    JONES      RESEARCH
+    MARTIN     SALES
+    BLAKE      SALES
+    CLARK      ACCOUNTING
+    SCOTT      RESEARCH
+    KING       ACCOUNTING
+    TURNER     SALES
+    ADAMS      RESEARCH
+    JAMES      SALES
+    FORD       RESEARCH
+    MILLER     ACCOUNTING
+    ```
+- Types of Joins are :
+    - Inner Join
+    - Left Outer Join
+    - Right Outer Join
+    - Full Outer Join
+    - Cross Join
+    - Self Join
+    - Natural Join
+### 2. Difference between INNER JOIN and OUTER JOIN?
+- Inner Join returns only matching records in both tables
+    ```
+    SELECT ename, dept.deptno, dname, loc
+    FROM emp inner join dept
+    On emp.deptno = dept.deptno;
+
+    Output:
+    =======
+    ENAME          DEPTNO DNAME          LOC
+    ---------- ---------- -------------- ----------
+    SMITH              20 RESEARCH       DALLAS
+    ALLEN              30 SALES          CHICAGO
+    WARD               30 SALES          CHICAGO
+    JONES              20 RESEARCH       DALLAS
+    MARTIN             30 SALES          CHICAGO
+    BLAKE              30 SALES          CHICAGO
+    CLARK              10 ACCOUNTING     NEW YORK
+    SCOTT              20 RESEARCH       DALLAS
+    KING               10 ACCOUNTING     NEW YORK
+    TURNER             30 SALES          CHICAGO
+    ADAMS              20 RESEARCH       DALLAS
+    JAMES              30 SALES          CHICAGO
+    FORD               20 RESEARCH       DALLAS
+    MILLER             10 ACCOUNTING     NEW YORK
+    ```
+- Left Join returns all rows from left table
+    ```
+    SELECT ename, dept.deptno, dname, loc
+    FROM emp left join dept
+    ON emp.deptno = dept.deptno ;
+
+    Output:
+    =======
+    ENAME          DEPTNO DNAME          LOC
+    ---------- ---------- -------------- -------------
+    MILLER             10 ACCOUNTING     NEW YORK
+    KING               10 ACCOUNTING     NEW YORK
+    CLARK              10 ACCOUNTING     NEW YORK
+    FORD               20 RESEARCH       DALLAS
+    ADAMS              20 RESEARCH       DALLAS
+    SCOTT              20 RESEARCH       DALLAS
+    JONES              20 RESEARCH       DALLAS
+    SMITH              20 RESEARCH       DALLAS
+    JAMES              30 SALES          CHICAGO
+    TURNER             30 SALES          CHICAGO
+    BLAKE              30 SALES          CHICAGO
+    MARTIN             30 SALES          CHICAGO
+    WARD               30 SALES          CHICAGO
+    ALLEN              30 SALES          CHICAGO
+    ```
+- Right join returns all rows from right table
+    ```
+    SELECT ename, dept.deptno, dname, loc
+    FROM emp RIGHT JOIN dept
+    ON emp.deptno = dept.deptno ;
+
+    Output:
+    =======
+    ENAME          DEPTNO DNAME          LOC
+    ---------- ---------- -------------- -------------
+    SMITH              20 RESEARCH       DALLAS
+    ALLEN              30 SALES          CHICAGO
+    WARD               30 SALES          CHICAGO
+    JONES              20 RESEARCH       DALLAS
+    MARTIN             30 SALES          CHICAGO
+    BLAKE              30 SALES          CHICAGO
+    CLARK              10 ACCOUNTING     NEW YORK
+    SCOTT              20 RESEARCH       DALLAS
+    KING               10 ACCOUNTING     NEW YORK
+    TURNER             30 SALES          CHICAGO
+    ADAMS              20 RESEARCH       DALLAS
+    JAMES              30 SALES          CHICAGO
+    FORD               20 RESEARCH       DALLAS
+    MILLER             10 ACCOUNTING     NEW YORK
+                       40 OPERATIONS     BOSTON
+    ```
+- Full join returns all the records
+    ```
+    SELECT ename, dept.deptno, dname, loc
+    FROM emp FULL JOIN dept
+    ON emp.deptno = dept.deptno ;
+
+    Output:
+    =======
+    ENAME          DEPTNO DNAME          LOC
+    ---------- ---------- -------------- -------------
+    SMITH              20 RESEARCH       DALLAS
+    ALLEN              30 SALES          CHICAGO
+    WARD               30 SALES          CHICAGO
+    JONES              20 RESEARCH       DALLAS
+    MARTIN             30 SALES          CHICAGO
+    BLAKE              30 SALES          CHICAGO
+    CLARK              10 ACCOUNTING     NEW YORK
+    SCOTT              20 RESEARCH       DALLAS
+    KING               10 ACCOUNTING     NEW YORK
+    TURNER             30 SALES          CHICAGO
+    ADAMS              20 RESEARCH       DALLAS
+    JAMES              30 SALES          CHICAGO
+    FORD               20 RESEARCH       DALLAS
+    MILLER             10 ACCOUNTING     NEW YORK
+                       40 OPERATIONS     BOSTON
+    ```
+### 3. Difference between JOIN and UNION?
+| JOIN               | UNION                     |
+| ------------------ | ------------------------- |
+| Combines columns   | Combines rows             |
+| Needs relationship | Doesn't need relationship |
+| Horizontal merge   | Vertical merge            |
+### 4. Difference between JOIN and SUBQUERY?
+| JOIN                     | Subquery                           |
+| ------------------------ | ---------------------------------- |
+| Combines multiple tables | Query inside another query         |
+| Usually faster           | Used for filtering or calculations |
+### 5. What is SELF JOIN?
+- Joining a table with itself.
+- Example:
+    ```
+    SELECT e.ename Employee,
+        m.ename Manager
+    FROM emp e
+    LEFT JOIN emp m
+    ON e.mgr = m.empno;
+
+    Output:
+    =======
+    EMPLOYEE   MANAGER
+    ---------- ----------
+    FORD       JONES
+    SCOTT      JONES
+    JAMES      BLAKE
+    TURNER     BLAKE
+    MARTIN     BLAKE
+    WARD       BLAKE
+    ALLEN      BLAKE
+    MILLER     CLARK
+    ADAMS      SCOTT
+    CLARK      KING
+    BLAKE      KING
+    JONES      KING
+    SMITH      FORD
+    KING
+    ```
+### 6. What is Equi Join?
+- If there is a common column between two tables, join those tables with `=` operator.
+    ```
+    SELECT e.empno, e.ename, e.deptno, d.dname, d.loc
+    FROM emp e, dept d
+    WHERE e.deptno = d.deptno;
+    ```
+### 7. What is Non-Equi Join?
+- We don't have common column between two tables, but data is same. Use non-equi joins to merge tables.
+- A Non-Equi Join is a join that uses a non-equality operator in the condition: (>, <, >=, <=, BETWEEN, etc.)
+- These joins are used when tables are related by ranges rather than exact matches.
+     ```
+     select empno,ename,sal,grade
+     from emp, salgrade
+     where sal between losal and hisal;
+     ```
+### 8. How do you find employees without departments?
+```
+SELECT e.*
+FROM emp e
+LEFT JOIN dept d
+ON e.deptno=d.deptno
+WHERE d.deptno IS NULL;
+```
+### 9. Find departments with no employees.
+```
+SELECT d.*
+FROM dept d
+LEFT JOIN emp e
+ON d.deptno=e.deptno
+WHERE e.empno IS NULL;
+```
+### 10. How do you display employee names with their manager names?
+    ```
+    SELECT e.ename AS emp_name,
+        m.ename AS mng_name
+    FROM emp e
+    LEFT JOIN emp m
+    ON e.mgr = m.empno;
+
+    Output:
+    =======
+    EMP_NAME   MNG_NAME
+    ---------- ----------
+    FORD       JONES
+    SCOTT      JONES
+    JAMES      BLAKE
+    TURNER     BLAKE
+    MARTIN     BLAKE
+    WARD       BLAKE
+    ALLEN      BLAKE
+    MILLER     CLARK
+    ADAMS      SCOTT
+    CLARK      KING
+    BLAKE      KING
+    JONES      KING
+    SMITH      FORD
+    KING
+    ```
+### 11. Find employees earning more than their managers.
+    ```
+    SELECT e.ename AS empname,
+           e.sal AS empSal,
+           m.ename AS mgrName,
+           m.sal AS mgrSal
+    FROM emp e
+    LEFT JOIN emp m
+    ON e.mgr = m.empno
+    WHERE e.sal > m.sal ;
+
+    Output:
+    =======
+    EMPNAME        EMPSAL MGRNAME        MGRSAL
+    ---------- ---------- ---------- ----------
+    FORD             3000 JONES            2975
+    SCOTT            3000 JONES            2975
+    ```
+### 12. Find the maximum number of employees in each department.
+    ```
+    SELECT d.dname,
+           COUNT(*) AS totalEmployees
+    FROM emp e
+    JOIN dept d
+    ON e.deptno = d.deptno
+    GROUP BY d.dname
+    ORDER BY totalEmployees DESC
+    ```
+### 13. Display employees along with salary grade
+    ```
+    SELECT e.ename,
+           e.Sal,
+           s.grade
+    FROM emp e
+    JOIN salgrade s
+    ON e.sal BETWEEN s.losal AND s.hisal;
+
+    Output:
+    =======
+    ENAME             SAL      GRADE
+    ---------- ---------- ----------
+    SMITH             800          1
+    ADAMS            1100          1
+    JAMES             950          1
+    WARD             1250          2
+    MARTIN           1250          2
+    MILLER           1300          2
+    ALLEN            1600          3
+    TURNER           1500          3
+    JONES            2975          4
+    BLAKE            2850          4
+    CLARK            2450          4
+
+    ENAME             SAL      GRADE
+    ---------- ---------- ----------
+    SCOTT            3000          4
+    FORD             3000          4
+    KING             5000          5
+    ```
+### 14. Find employees who do not have a manager.
+    ```
+    SELECT ename
+    FROM emp
+    WHERE mgr IS NULL;
+
+    Output:
+    =======
+    ENAME
+    ----------
+    KING
+    ```
+### 15. List each employee with their department name and manager name.
+    ```
+    SELECT e.ename empName,
+           d.dname deptName,
+           m.ename mgrName
+    FROM emp e
+    JOIN dept d
+        ON e.deptno = d.deptno
+    LEFT JOIN emp m
+        ON e.mgr = m.empno;
+
+    OUTPUT:
+    =======
+    EMPNAME    DEPTNAME       MGRNAME
+    ---------- -------------- ----------
+    FORD       RESEARCH       JONES
+    SCOTT      RESEARCH       JONES
+    JAMES      SALES          BLAKE
+    TURNER     SALES          BLAKE
+    MARTIN     SALES          BLAKE
+    WARD       SALES          BLAKE
+    ALLEN      SALES          BLAKE
+    MILLER     ACCOUNTING     CLARK
+    ADAMS      RESEARCH       SCOTT
+    CLARK      ACCOUNTING     KING
+    BLAKE      SALES          KING
+    JONES      RESEARCH       KING
+    SMITH      RESEARCH       FORD
+    KING       ACCOUNTING
+    ```
+
+## SubQueries;
+### 1. What is a subquery?
+- A subquery is a query written inside another SQL statement.
+- It is enclosed within parentheses and executes before the outer query.
+- Example
+    ```
+    SELECT ename
+    FROM emp
+    WHERE sal >
+    (
+        SELECT AVG(sal)
+        FROM emp
+    );
+    ```
+### 2. What are the different types of subqueries?
+1. Single-row subquery
+    - Returns only one row
+    - Use operators like =, <=, >=, <>
+    - Example
+        ```
+        SELECT ename
+        FROM emp
+        WHERE deptno =
+        (
+            SELECT deptno
+            FROM dept
+            WHERE dname='SALES'
+        );
+        ```
+2. Multiple-row subquery
+    - Returns multiple rows.
+    - Use operators like: IN, ANY, ALL, EXISTS
+    - Example :
+        ```
+        SELECT ename
+        FROM emp
+        WHERE deptno IN
+        (
+            SELECT deptno
+            FROM dept
+            WHERE loc='NEW YORK'
+        );
+        ```
+3. Multiple-column subquery
+4. Correlated subquery
+5. Nested subquery
+    - A subquery inside another subquery.
+    - Example
+        ```
+        SELECT ename
+        FROM emp
+        WHERE deptno =
+        (
+            SELECT deptno
+            FROM dept
+            WHERE loc =
+            (
+                SELECT loc
+                FROM dept
+                WHERE dname='ACCOUNTING'
+            )
+        );
+        ```
+### 3. What happens if a single-row subquery returns multiple rows?
+- Oracle throws
+    ```
+    ORA-01427:
+    single-row subquery returns more than one row
+    ```
+- Example
+    ```
+    SELECT *
+    FROM emp
+    WHERE deptno =
+    (
+        SELECT deptno
+        FROM dept
+    );
+    ```
+### 4. Find employees earning more than the average salary of their department.
+```
+SELECT e1.ename,
+       e1.deptno,
+       e1.sal
+FROM emp e1
+WHERE e1.sal >
+(
+    SELECT AVG(e2.sal)
+        FROM emp e2
+    WHERE e1.deptno = e2.deptno
+);
+
+Output:
+=======
+ENAME          DEPTNO        SAL
+---------- ---------- ----------
+ALLEN              30       1600
+JONES              20       2975
+BLAKE              30       2850
+SCOTT              20       3000
+KING               10       5000
+FORD               20       3000
+```
+### 5. Find departments that have no employees.
+```
+SELECT *
+FROM dept d
+WHERE NOT EXISTS
+(
+   SELECT 1
+   FROM emp e
+   WHERE e.deptno = d.deptno
+);
+
+OUTPUT:
+-------
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        40 OPERATIONS     BOSTON
+```
+
 
 ## Objects:
------------------
 ### 1. What are SQL Objects?
 - SQL objects are database structures used to store, organize, retrieve, and manipulate data.
 - Examples:
@@ -321,4 +783,23 @@ SELECT LPAD(' ', LEVEL*3) || ename Employee
 FROM emp
 START WITH mgr IS NULL
 CONNECT BY PRIOR empno = mgr;
+
+Output:
+-------
+EMPLOYEE
+---------------------
+   KING
+      JONES
+         SCOTT
+            ADAMS
+         FORD
+            SMITH
+      BLAKE
+         ALLEN
+         WARD
+         MARTIN
+         TURNER
+         JAMES
+      CLARK
+         MILLER
 ```

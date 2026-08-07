@@ -54,7 +54,7 @@
 2. **Natural Join**
     - search for the common columns between the two tables and join the data.
     - `select ename,deptno,dname,loc from emp natural join dept;`
-    - **Using Clause** - same as NAtural join. But when we have two same columns in two tables, go for Using clause
+    - **Using Clause** - same as Natural join. But when we have two same columns in two tables, go for Using clause
         - `select ename,deptno,dname,loc from emp join dept using(deptno);`
 3. **Equi Joins**
 4. **Non Equi joins**
