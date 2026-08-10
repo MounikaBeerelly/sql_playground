@@ -92,3 +92,33 @@ SQL>SELECT * FROM
     )
     WHERE rnk = 2;
 
+6. How to update records in a table based on the values from another table using a SQL query?
+---------------------------------------------------------------------------------------------
+Scenario-1: Update Salary of all employees by 5% belonging to department id 20
+
+SQL> UPDATE emp
+     SET sal = sal * 1.05
+     WHERE deptno = 20;
+
+Scenario-2: Update Salary of all employees by 5% belonging to IT department
+
+STEP 1: Find the department ID of IT department
+SQL>SELECT deptno FROM dept WHERE dname ='IT';
+
+STEP 2: Update salary for all employees belonging to IT department
+UPDATE emp
+SET sal = sal * 1.05
+WHERE deptno = (SELECT deptno FROM dept WHERE dname = 'IT');
+
+7. How to delete records in a table based on the values from another table using a SQL query?
+---------------------------------------------------------------------------------------------
+Scenario-1: Delete records of all employees by belonging to department id 20
+
+SQL> DELETE FROM emp WHERE deptno = 20;
+
+Scenario-2: Delete records of all employees belonging to IT department
+
+SQL > DELETE FROM emp
+      WHERE deptno = (
+        SELECT deptno FROM dept WHERE dname = 'IT'
+     );
