@@ -281,3 +281,44 @@ SQL> GRANT SELECT, INSERT
      ON boats
      TO dba99;
 
+38. Create a table emp_sailor with the same structure  as sailor table;
+SQL> CREATE TABLE emp_sailor
+     AS
+     SELECT * FROM sailors;
+
+39.Insert records into emp_sailor from sailors table.
+SQL> INSERT INTO emp_sailor
+     SELECT *
+     FROM sailors;
+
+40.Remove select, insert privilege on boats table from user dba99.
+SQL> REVOKE SELECT, INSERT
+     ON boats
+     FROM dba99;
+41.	Print all dates by adding one month to the existing date on day column of a reserves table.
+SQL> SELECT ADD_MONTHS(day,1) FROM reserves;
+
+42. Print the current date in format (mmm-dd-yyyy:hh:mm:ss).
+SQL> SELECT TO_CHAR(SYSDATE, 'MON-DD-YYYY:HH24:MI:SS') AS formatted_date FROM DUAL;
+
+43. Return the no of months between these dates 07th jan 2008 to 27th aug 2010.
+SQL> SELECT MONTHS_BETWEEN(TO_DATE('27-AUG-2010', 'DD-MON-YYYY'), TO_DATE('07-JAN-2008', 'DD-MON-YYYY')) AS month_diff FROM DUAL;
+
+44. Print the next date of the sys date;
+SQL> SELECT SYSDATE + 1 AS next_date FROM DUAL;
+
+45. Update rating of all employees according to the following conditions
+Rating	updated value  [use ‘case’]
+ > 7	8
+ 5-7	7
+ 1-4	6
+
+SQL> UPDATE sailors
+     SET rating =
+        CASE
+            WHEN rating > 7 THEN 8
+            WHEN rating BETWEEN 5 AND 7 THEN 7
+            WHEN rating BETWEEN 1 AND 4 THEN 6
+            ELSE NULL
+     END;
+
