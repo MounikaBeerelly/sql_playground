@@ -295,6 +295,7 @@ SQL> INSERT INTO emp_sailor
 SQL> REVOKE SELECT, INSERT
      ON boats
      FROM dba99;
+
 41.	Print all dates by adding one month to the existing date on day column of a reserves table.
 SQL> SELECT ADD_MONTHS(day,1) FROM reserves;
 
@@ -308,7 +309,7 @@ SQL> SELECT MONTHS_BETWEEN(TO_DATE('27-AUG-2010', 'DD-MON-YYYY'), TO_DATE('07-JA
 SQL> SELECT SYSDATE + 1 AS next_date FROM DUAL;
 
 45. Update rating of all employees according to the following conditions
-Rating	updated value  [use ‘case’]
+Rating	updated value  [use 'case']
  > 7	8
  5-7	7
  1-4	6
