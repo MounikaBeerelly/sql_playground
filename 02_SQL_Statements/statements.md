@@ -85,5 +85,5 @@
 
 4. **DCL - Data Control Language** : Security commands comes under DCL
 
-
 5. **DRL - Data Retrieval Language** : Retrieving the data.
+    - SELECT

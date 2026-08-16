@@ -9,9 +9,9 @@
 7. Nvarchar2
 
 - **Number** : stores number type of data
-- **Char and Varchar2** : stores string type of data.  
-    - char will occupy fixed length.
-    - varchar2 will occupy variable length.
+- **Char and Varchar2** : stores string type of data.
+    - char will occupy fixed defined length.
+    - varchar2 will occupy variable (actual data) length.
 - **Date and Timestamp** : stores date with time.
     - Default format - `DD-MON-YYYY HH24:MI:SS`
 - **Nchar and NvarChar2**: storing national characters.
