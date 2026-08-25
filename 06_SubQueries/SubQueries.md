@@ -75,7 +75,7 @@ select empno,ename,job,sal
     where emp.deptno = dept.deptno
         and dept.dname = 'SALES';
 ```
-5. **Get the details of employees whose salary is equla to the highest salary**
+5. **Get the details of employees whose salary is equal to the highest salary**
     ```
     select empno,ename,sal,job
         from emp

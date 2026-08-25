@@ -11,15 +11,20 @@
 
 -------------------------------------------------------------
 - **Cardinality** : Cardinality describes how data in one entity (table) related to data in another entity.
-    - One to One relationship
-    - One to Many
-    - Many to many
+    - One to One relationship : Employee - Dept
+        - One employee belongs to one department
+    - One to Many : Dept to Employee
+        - One department contains multiple employees
+    - Many to many : Dept - Loc
+        - If there is a one to many relationship in both the sides of data
+        - One department belongs to multiple locations and one location will contain multiple departments
 - **Data** : Storage representation of objeccts and events
     - Actual information stored in database.
 - **Metadata** : Data about data
     - It describes the structure and properties of the actual data
-- **Schema** : Structure of the database.
+- **Schema** : Collection of objects or logical name for the group of objects
     - User account with objects is called as schema. User with no objects in his account then we called as `user account not schema`.
+- **Database Model** :
 - **SQL** : Structure Query Language
     - It is designed for managing the data in the Relational database Management System.
 - If we want to store the data in the databases form of tables. Tables are combination of columns and rows.
