@@ -140,7 +140,8 @@ WHERE NOT EXISTS (
     WHERE D.EMPLOYEE_ID = S.EMPLOYEE_ID
 );
 
--- MERGE update and insert queries - MERGE ALL RECORDS
+-- MERGE update and insert queries
+    -- Note : ThIS Merge UPDATES All The Records, Including Changes and Unchanged : Non Optimized Implementation
 MERGE INTO DIM_EMPLOYEE01 D
 USING STG_EMPLOYEE01 S
 ON (D.EMPLOYEE_ID = S.EMPLOYEE_ID)
@@ -169,6 +170,7 @@ VALUES (
 );
 
 -- MERGE (OPTIMIZED QUERY) - ONLY UPDATED AND NEW RECORDS WILL MERGE
+    -- Note : ThIS Merge UPDATES Only The Records, Excluding Unchanged Records : Optimized Implementation
 MERGE INTO DIM_EMPLOYEE01 D
 USING STG_EMPLOYEE01 S
 ON (D.EMPLOYEE_ID = S.EMPLOYEE_ID)
