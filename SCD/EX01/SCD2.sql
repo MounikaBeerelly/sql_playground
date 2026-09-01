@@ -134,3 +134,60 @@ WHERE NOT EXISTS (
     FROM TARGET_EMPLOYEE T
     WHERE T.EMPLOYEE_ID = S.EMPLOYEE_ID
 );
+
+Implementing SCD Type 2 Using MERGE Statement
+--------------------------------------------------------------
+1. A Single MERGE Cannot Both UPDATE (Expire Old Record) and INSERT (New Version) in One Single Pass
+2. We Have To Use Two MERGE Statements
+	1. MERGE 1 For Expire Old Records : UPDATE
+	2. MERGE 2 For Inserting New Records : INSERT
+
+Step 01 : Handling Expire Old Records For Changed data in The Source
+---------
+MERGE INTO TARGET_EMPLOYEE T
+USING SOURCE_EMPLOYEE S
+ON (T.EMPLOYEE_ID = S.EMPLOYEE_ID AND T.IS_ACTIVE = 'Y')
+WHEN MATCHED THEN
+UPDATE SET
+	T.END_DATE = SYSDATE - 1,
+	T.IS_ACTIVE = 'N'
+WHERE
+	NVL(T.EMPLOYEE_NAME,'X') <> NVL(S.EMPLOYEE_NAME,'X') OR
+	NVL(T.GENDER,'X') <> NVL(S.GENDER,'X') OR
+	NVL(T.STATUS,'X') <> NVL(S.STATUS,'X');
+
+Step 02 : Handling Expire New Records For New Version of Records Inserted into The Source
+---------
+
+MERGE INTO TARGET_EMPLOYEE T
+USING (
+	SELECT S.*
+	FROM SOURCE_EMPLOYEE S
+	) S
+ON	(
+	T.EMPLOYEE_ID = S.EMPLOYEE_ID AND
+	T.IS_ACTIVE = 'Y'
+	)
+WHEN NOT MATCHED THEN
+INSERT (
+	EMPLOYEE_KEY,
+	EMPLOYEE_ID,
+	EMPLOYEE_NAME,
+	GENDER,
+	HIRE_DATE,
+	STATUS,
+	START_DATE,
+	END_DATE,
+	IS_ACTIVE
+	)
+VALUES (
+	SEQ_EMP.NEXTVAL,
+	S.EMPLOYEE_ID,
+	S.EMPLOYEE_NAME,
+	S.GENDER,
+	S.HIRE_DATE,
+	S.STATUS,
+	SYSDATE,
+	DATE '9999-12-31',
+	'Y'
+);
